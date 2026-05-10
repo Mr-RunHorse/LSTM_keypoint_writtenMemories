@@ -147,7 +147,7 @@ $\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x
 
 >$s_t = \phi( W s_{t-1} + U x_t + b )$
 >其中：
->
+
  $\phi$：激活函数（sigmoid、tanh、ReLU 等）
  $s_t \in \mathbb{R}^n$：当前状态（也是输出）
  $s_{t-1} \in \mathbb{R}^n$：上一状态
@@ -172,7 +172,8 @@ $\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x
 很容易证明普通 RNN 中必然发生信息畸变。假设在没有外部输入时，RNN 单元能完全保留上一状态，那么：
 
 $F(x) = \phi( W s_{t-1} + b )$
-会是关于$s_{t−1}$ 的恒等函数。但恒等函数是线性的，而 $F(x)$ 是非线性的，矛盾。因此 RNN 单元**必然**会在时间步之间扭曲状态。普通 RNN 甚至无法完成输出 $s_{t}$ = $x_{t}$ 这种简单任务。
+
+会是关于 $s_{t−1}$ 的恒等函数。但恒等函数是线性的，而 $F(x)$ 是非线性的，矛盾。因此 RNN 单元**必然**会在时间步之间扭曲状态。普通 RNN 甚至无法完成输出 $s_{t}$ = $x_{t}$ 这种简单任务。
 
 这就是某些文献中所说的**退化问题**的根源[（如 He et al., 2015）](https://arxiv.org/abs/1512.03385)。作者称这一问题“出乎意料”、“反直觉”，但我希望本文能说明：退化问题（即信息畸变）其实非常自然（在很多情况下甚至是可取的）。我们后面会看到，虽然信息畸变不是 LSTM 最初的设计动机，但 LSTM 的原理恰好有效解决了这个问题。事实上，He 等人所用残差网络的有效性，也来自 LSTM 的核心原理。
 
@@ -188,7 +189,7 @@ $F(x) = \phi( W s_{t-1} + b )$
 
 梯度消失/爆炸的数学分析可追溯到 90 年代初：[Bengio et al\. \(1994\)](http://www.dsi.unifi.it/~paolo/ps/tnn-94-gradient.pdf)、Hochreiter \(1991\)（德文原文，相关部分总结于 [Hochreiter \&amp; Schmidhuber, 1997）](http://isle.illinois.edu/sst/meetings/2015/hochreiter-lstm.pdf)。
 
-设 $s_{t}$ 为 $t$ 时刻状态向量，$Δv$为状态变化 $Δs_{t}$ 导致的向量变化。我们要给出一个充分条件，使得 $t$ 时刻状态变化对 $t+k$ 时刻的影响随$k→∞$消失，即证明：
+设 $s_{t}$ 为 $t$ 时刻状态向量，$Δv$为状态变化 $Δs_{t}$ 导致的向量变化。我们要给出一个充分条件，使得 $t$ 时刻状态变化对 $t+k$ 时刻的影响随 $k→∞$ 消失，即证明：
 
 $\Large lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0$
 
@@ -203,12 +204,16 @@ $\large s_{t+1} = \phi( z_t ),\quad 其中 \quad z_t = W s_t + U x_{t+1} + b$
 
 
 
-对多元函数应用**多元均值定理**，可证存在 $c \in [z_t,\ z_t+\Delta z_t]$，使得： $$ \begin{align*} \Delta s_{t+1} &= \big[\phi'(c)\big]\Delta z_t \\ &= \big[\phi'(c)\big]\Delta\left(W s_t\right) \\ &= \big[\phi'(c)\big]W \Delta s_t \end{align*} $$ 设 $\|A\|$ 为矩阵2‑范数，$|v|$ 为欧几里得向量范数，定义： $$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $$ 注：逻辑Sigmoid激活函数满足 $\gamma \leq \frac{1}{4}$，tanh激活函数满足 $\gamma \leq 1$。$^8$ 对等式两侧取向量范数，推导如下：第一个不等式由矩阵2‑范数定义（连续使用两次）得到，第二个不等式由上确界定义得到： $$ \begin{align} \left|\Delta s_{t+1}\right| &= \big\|\big[\phi'(c)\big]W \Delta s_t\big\| \\ &\leq \big\|\big[\phi'(c)\big]\big\| \|W\| \left\|\Delta s_t\right\| \\ &\leq \gamma \|W\| \left\|\Delta s_t\right\| \\ &= \|\gamma W\| \left\|\Delta s_t\right\| \end{align} \tag{1} $$
+对多元函数应用**多元均值定理**，可证存在 $c \in [z_t,\ z_t+\Delta z_t]$，使得： 
+$$ \begin{align*} \Delta s_{t+1} &= \big[\phi'(c)\big]\Delta z_t \\ &= \big[\phi'(c)\big]\Delta\left(W s_t\right) \\ &= \big[\phi'(c)\big]W \Delta s_t \end{align*} $$
+设 $\|A\|$ 为矩阵2‑范数，$|v|$ 为欧几里得向量范数，定义： 
+$$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $$
+注：逻辑Sigmoid激活函数满足 $\gamma \leq \frac{1}{4}$，tanh激活函数满足 $\gamma \leq 1$。$^8$ 对等式两侧取向量范数，推导如下：第一个不等式由矩阵2‑范数定义（连续使用两次）得到，第二个不等式由上确界定义得到： $$ \begin{align} \left|\Delta s_{t+1}\right| &= \big\|\big[\phi'(c)\big]W \Delta s_t\big\| \\ &\leq \big\|\big[\phi'(c)\big]\big\| \|W\| \left\|\Delta s_t\right\| \\ &\leq \gamma \|W\| \left\|\Delta s_t\right\| \\ &= \|\gamma W\| \left\|\Delta s_t\right\| \end{align} \tag{1} $$ 
 将该式沿 $k$ 个时间步展开，可得 $\left|\Delta s_{t+k}\right| \leq \|\gamma W\|^k \left|\Delta s_t\right|$，
-因此： $$ \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|} \leq \|\gamma W\|^k $$
-因此，若满足 $\|\gamma W\| < 1$，则 $\frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|}$ 随时间呈指数衰减，由此证明梯度消失的**充分条件**： $$ {\lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0} $$
+因此： $$ \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|} \leq \|\gamma W\|^k $$ 
+因此，若满足 $\|\gamma W\| < 1$，则 $\frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|}$ 随时间呈指数衰减，由此证明梯度消失的**充分条件**： $$ {\lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0} $$ 
 ### 收敛于0的条件：
-何时满足 $\|\gamma W\| < 1$？ **即k步后累乘 → 0**
+何时满足 $\|\gamma W\| < 1$ ？ **即k步后累乘 → 0**
 >隐含层为 **Sigmoid** 时：$\gamma \leq 1/4$ → $\|W\| < 4$ 就满足
 >隐含层为 **Tanh** 时：$\gamma \leq 1$ → $\|W\| < 1$ 就满足
 
@@ -228,13 +233,13 @@ $\large s_{t+1} = \phi( z_t ),\quad 其中 \quad z_t = W s_t + U x_{t+1} + b$
 >2.  我们在公式 (1) 中尽可能接近等式。
 
 从第 1 点来看，既然我们取 $\gamma$ 为 1，我们有 $\|W\| = 1$。从第 2 点，我们得出应该尝试将 $W$ 的所有奇异值设为 1，而不仅仅是最大的那个。那么，如果 $W$ 的所有奇异值都等于 1，这意味着 $W$ 的每一列的范数都是 1（因为每一列是 $W e_i$，对于某个初等基向量 $e_i$，且我们有 $|W e_i| = |e_i| = 1$）。这意味着对于第 $j$ 列，我们有：
-$$\Sigma_i w_{ij}^2 = 1$$
+ $$\Sigma_i w_{ij}^2 = 1$$
 
 第 $j$ 列中有 $n$ 个条目，我们要从同一个随机分布中选择每一个，所以让我们为一个随机权重 $w$ 找到一个分布，使得：
-$$n\mathbb{E}(w^2) = 1$$
+ $$n\mathbb{E}(w^2) = 1$$
 
 现在假设我们要在区间 $[-R, R]$ 上均匀初始化 $w$。那么 $w$ 的均值为 0，所以根据定义，$\mathbb{E}(w^2)$ 就是其方差 $\mathbb{V}(w)$。区间 $[a, b]$ 上均匀分布的方差由 $\frac{(b-a)^2}{12}$ 给出，由此我们得到 $\mathbb{V}(w) = \frac{R^2}{3}$。将其代入我们的方程，我们得到：
-$$n \frac{R^2}{3} = 1$$
+ $$n \frac{R^2}{3} = 1$$ 
 使得：
 $$R = \frac{\sqrt{3}}{\sqrt{n}}$$
 这表明我们应该从以下区间上的均匀分布初始化我们的权重：
