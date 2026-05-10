@@ -20,7 +20,7 @@
             }
           },
           {
-            "id": "4a11c74cd4fe4703",
+            "id": "f8134ffc101b214e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -208,12 +208,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "81629ae27d6244f6",
+  "active": "f8134ffc101b214e",
   "lastOpenFiles": [
+    "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
     "LSTM笔记_打包发布/markdown",
     "LSTM笔记_打包发布/img",
     "LSTM笔记_打包发布/img/关于LSTM：起源 本身 延伸--1.jpg",
-    "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
     "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--15.jpg",
     "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--14.jpg",
     "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--13.jpg",
@@ -235,7 +235,6 @@
     "函数CSV图片/sigmoid_有坐标轴.txt",
     "函数CSV图片/sigmoid.txt",
     "函数CSV图片/sigmoid.csv",
-    "函数CSV图片",
     "神经网络/RNN/循环神经网络（RNN）：让AI学会“看懂电影”的时间感知机制.md",
     "神经网络/RNN/RNN网课初稿.md",
     "Step3_IGBT/IGBT导通原理学习笔记（贴合个人推理版）.md",
