@@ -210,14 +210,14 @@ $$ \begin{align*} \Delta s_{t+1} &= \big[\phi'(c)\big]\Delta z_t \\ &= \big[\phi
 设 $\|A\|$ 为矩阵2‑范数， $|v|$ 为欧几里得向量范数，定义：
 
 $$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $$ 
-注：逻辑Sigmoid激活函数满足 $\gamma \leq \frac{1}{4}$，tanh激活函数满足 $\gamma \leq 1$。$^8$ 对等式两侧取向量范数，推导如下：第一个不等式由矩阵2‑范数定义（连续使用两次）得到，第二个不等式由上确界定义得到： $$ \begin{align} \left|\Delta s_{t+1}\right| &= \big\|\big[\phi'(c)\big]W \Delta s_t\big\| \\ &\leq \big\|\big[\phi'(c)\big]\big\| \|W\| \left\|\Delta s_t\right\| \\ &\leq \gamma \|W\| \left\|\Delta s_t\right\| \\ &= \|\gamma W\| \left\|\Delta s_t\right\| \end{align} \tag{1} $$ 
+注：逻辑Sigmoid激活函数满足 $\gamma \leq \frac{1}{4}$，tanh激活函数满足 $\gamma \leq 1$。 $^8$ 对等式两侧取向量范数，推导如下：第一个不等式由矩阵2‑范数定义（连续使用两次）得到，第二个不等式由上确界定义得到： $$ \begin{align} \left|\Delta s_{t+1}\right| &= \big\|\big[\phi'(c)\big]W \Delta s_t\big\| \\ &\leq \big\|\big[\phi'(c)\big]\big\| \|W\| \left\|\Delta s_t\right\| \\ &\leq \gamma \|W\| \left\|\Delta s_t\right\| \\ &= \|\gamma W\| \left\|\Delta s_t\right\| \end{align} \tag{1} $$ 
 将该式沿 $k$ 个时间步展开，可得 $\left|\Delta s_{t+k}\right| \leq \|\gamma W\|^k \left|\Delta s_t\right|$，
 因此：                                      $\large \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|} \leq \|\gamma W\|^k$ 
-因此，若满足 $\|\gamma W\| < 1$，则 $\frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|}$ 随时间呈指数衰减，由此证明梯度消失的**充分条件**：    $$ {\lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0} $$ 
+因此，若满足 $\|\gamma W\| < 1$，则 $\large \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|}$ 随时间呈指数衰减，由此证明梯度消失的**充分条件**：    $$ {\lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0} $$ 
 ### 收敛于0的条件：
 何时满足 $\|\gamma W\| < 1$ ？ **即k步后累乘 → 0**
->隐含层为 **Sigmoid** 时：$\gamma \leq 1/4$ → $\|W\| < 4$ 就满足
->隐含层为 **Tanh** 时：$\gamma \leq 1$ → $\|W\| < 1$ 就满足
+>隐含层为 **Sigmoid** 时： $\gamma \leq 1/4$ → $\|W\| < 4$ 就满足
+>隐含层为 **Tanh** 时： $\gamma \leq 1$ → $\|W\| < 1$ 就满足
 
 该推导直接给出**结论**：
 	若权重矩阵 $W$ 初始化值**过小**，循环神经网络（RNN）会**因梯度消失**，无法有效学习初始阶段的信息。下文将拓展该分析，推导合理的权重初始化方案。
@@ -228,10 +228,10 @@ $$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $
 
 找到一种不会立即遭受此问题困扰的权重初始化方法是有益的。扩展上述分析以找到能让我们尽可能接近等式的 $W$ 的初始化，会得出一个很好的结果。
 
-首先，让我们假设 $\phi = \tanh$ 并取 $\gamma = 1$，$^9$ 但你也可以同样容易地假设 $\phi = \sigma$ 并取 $\gamma = \frac{1}{4}$ 来得出不同的结果。
+首先，让我们假设 $\phi = \tanh$ 并取 $\gamma = 1$， $^9$ 但你也可以同样容易地假设 $\phi = \sigma$ 并取 $\gamma = \frac{1}{4}$ 来得出不同的结果。
 
 我们的目标是找到一个 $W$ 的**初始化**，使得：
->1.  $\|\gamma W\| = 1$。
+>1.  $\|\gamma W\| = 1$ 。
 >2.  我们在公式 (1) 中尽可能接近等式。
 
 从第 1 点来看，既然我们取 $\gamma$ 为 1，我们有 $\|W\| = 1$。从第 2 点，我们得出应该尝试将 $W$ 的所有奇异值设为 1，而不仅仅是最大的那个。那么，如果 $W$ 的所有奇异值都等于 1，这意味着 $W$ 的每一列的范数都是 1（因为每一列是 $W e_i$，对于某个初等基向量 $e_i$，且我们有 $|W e_i| = |e_i| = 1$）。这意味着对于第 $j$ 列，我们有：
