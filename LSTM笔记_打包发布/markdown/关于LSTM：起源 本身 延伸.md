@@ -245,7 +245,9 @@ $$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $
 使得：
 $$R = \frac{\sqrt{3}}{\sqrt{n}}$$
 这表明我们应该从以下区间上的均匀分布初始化我们的权重：
+
 $$\left[ -\frac{\sqrt{3}}{\sqrt{n}}, \frac{\sqrt{3}}{\sqrt{n}} \right]$$
+
 这是一个很好的结果，因为它是方阵权重矩阵的 Xavier-Glorot 初始化，但却是出于不同的动机。Xavier-Glorot 初始化由 [Glorot 和 Bengio (2010) ](http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf)提出，在实践中已被证明是一种有效的权重初始化方案。更一般地，Xavier-Glorot 方案适用于层中使用的 $m \times n$ 权重矩阵，该层的激活函数在原点附近的导数接近于 1（如 $\tanh$），并指出我们应该根据以下区间的均匀分布来初始化权重：
 $$\left[ -\frac{\sqrt{6}}{\sqrt{m+n}}, \frac{\sqrt{6}}{\sqrt{m+n}} \right]$$
 你可以轻松修改上述分析，以获得在使用逻辑 Sigmoid 函数（使用 $\gamma = \frac{1}{4}$）时以及根据不同的随机分布（例如，高斯分布）初始化权重时的初始化方案。
