@@ -1,6 +1,6 @@
 # LSTM_keypoint_writtenMemories
 讲解 LSTM 结构背后的直觉，借此一步步搭建并推导出 LSTM
-# 《关于LSTM：起源、本身与延伸》学习笔记与译文 
+# 《关于LSTM：起源、本身与延伸》学习笔记（译文并且有小改动） 
 ## 📖 仓库简介 
 这是一份对经典文章《Written Memories: Understanding, Deriving, and Extending the LSTM》的中文翻译与学习笔记，包含： 
 - 原文完整译文，还原文章逻辑与推导过程
@@ -8,14 +8,30 @@
 - 补充推导笔记，解释梯度消失、门控机制等关键数学原理 适合所有想深入理解LSTM的机器学习/深度学习学习者。 
 --- 
 ## 📂 仓库结构
-├── markdown/
 
-│ └── 关于 LSTM：起源 本身 延伸.md # 主译文与笔记文件
+```plaintext LSTM
+笔记_打包发布/ 
+├── img/ 
+│    ├── 关于LSTM：起源 本身 延伸--1.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--2.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--3.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--4.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--5.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--6.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--7.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--8.png 
+│    ├── 关于LSTM：起源 本身 延伸--9.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--10.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--11.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--12.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--13.jpg 
+│    ├── 关于LSTM：起源 本身 延伸--14.jpg 
+│    └── 关于LSTM：起源 本身 延伸--15.jpg 
+├── markdown/ 
+│    └── 关于LSTM：起源 本身 延伸.md 
+└── README.md
+```
 
-├── img/
-
-│ └── _.jpg/_.png # 原创结构示意图与推导过程图
-  
 --- 
 ## 📜 版权与声明 
 - **原文出处**：《Written Memories: Understanding, Deriving, and Extending the LSTM》，作者：Silviu Pitis 
