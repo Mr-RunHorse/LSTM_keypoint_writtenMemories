@@ -1,5 +1,7 @@
 # LSTM_keypoint_writtenMemories
 # 《关于LSTM：起源、本身与延伸》学习笔记（译文并且有小改动） 
+
+**tips：Obsidian赏味效果最佳**
 ## 📖 仓库简介 
 这是一份对经典文章《Written Memories: Understanding, Deriving, and Extending the LSTM》的中文翻译与学习笔记，包含： 
 - 原文完整译文，还原文章逻辑与推导过程
