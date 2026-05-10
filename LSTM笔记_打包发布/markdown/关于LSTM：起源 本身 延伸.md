@@ -191,7 +191,7 @@ $$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ 
 
 梯度消失/爆炸的数学分析可追溯到 90 年代初：[Bengio et al\. \(1994\)](http://www.dsi.unifi.it/~paolo/ps/tnn-94-gradient.pdf)、Hochreiter \(1991\)（德文原文，相关部分总结于 [Hochreiter \&amp; Schmidhuber, 1997）](http://isle.illinois.edu/sst/meetings/2015/hochreiter-lstm.pdf)。
 
-设 $s_{t}$ 为 $t$ 时刻状态向量，$Δv$为状态变化 $Δs_{t}$ 导致的向量变化。我们要给出一个充分条件，使得 $t$ 时刻状态变化对 $t+k$ 时刻的影响随 $k→∞$ 消失，即证明：
+设 $s_{t}$ 为 $t$ 时刻状态向量， $Δv$ 为状态变化 $Δs_{t}$ 导致的向量变化。我们要给出一个充分条件，使得 $t$ 时刻状态变化对 $t+k$ 时刻的影响随 $k→∞$ 消失，即证明：
 
 $\Large lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0$
 
@@ -203,19 +203,17 @@ $\Large lim_{k \to \infty} \frac{\partial s_{t+k}}{\partial s_t} = 0$
 
 $\large s_{t+1} = \phi( z_t ),\quad 其中 \quad z_t = W s_t + U x_{t+1} + b$
 
-
-
-
 对多元函数应用**多元均值定理**，可证存在 $c \in [z_t,\ z_t+\Delta z_t]$，使得：
 
 $$ \begin{align*} \Delta s_{t+1} &= \big[\phi'(c)\big]\Delta z_t \\ &= \big[\phi'(c)\big]\Delta\left(W s_t\right) \\ &= \big[\phi'(c)\big]W \Delta s_t \end{align*} $$
 
-设 $\|A\|$ 为矩阵2‑范数，$|v|$ 为欧几里得向量范数，定义： 
+设 $\|A\|$ 为矩阵2‑范数， $|v|$ 为欧几里得向量范数，定义：
+
 $$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $$ 
 注：逻辑Sigmoid激活函数满足 $\gamma \leq \frac{1}{4}$，tanh激活函数满足 $\gamma \leq 1$。$^8$ 对等式两侧取向量范数，推导如下：第一个不等式由矩阵2‑范数定义（连续使用两次）得到，第二个不等式由上确界定义得到： $$ \begin{align} \left|\Delta s_{t+1}\right| &= \big\|\big[\phi'(c)\big]W \Delta s_t\big\| \\ &\leq \big\|\big[\phi'(c)\big]\big\| \|W\| \left\|\Delta s_t\right\| \\ &\leq \gamma \|W\| \left\|\Delta s_t\right\| \\ &= \|\gamma W\| \left\|\Delta s_t\right\| \end{align} \tag{1} $$ 
 将该式沿 $k$ 个时间步展开，可得 $\left|\Delta s_{t+k}\right| \leq \|\gamma W\|^k \left|\Delta s_t\right|$，
-因此： $$ \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|} \leq \|\gamma W\|^k $$ 
-因此，若满足 $\|\gamma W\| < 1$，则 $\frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|}$ 随时间呈指数衰减，由此证明梯度消失的**充分条件**： $$ {\lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0} $$ 
+因此：                                      $\large \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|} \leq \|\gamma W\|^k$ 
+因此，若满足 $\|\gamma W\| < 1$，则 $\frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|}$ 随时间呈指数衰减，由此证明梯度消失的**充分条件**：    $$ {\lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0} $$ 
 ### 收敛于0的条件：
 何时满足 $\|\gamma W\| < 1$ ？ **即k步后累乘 → 0**
 >隐含层为 **Sigmoid** 时：$\gamma \leq 1/4$ → $\|W\| < 4$ 就满足
