@@ -93,14 +93,13 @@ RNN 是**相同前馈网络的组合**，每个时刻/时间步对应一个，�
 
 RNN 单元的代数描述：
 
-$$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x_t \end{pmatrix} \right)$$
-
+$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x_t \end{pmatrix} \right)$
 
 其中：
-- **$s_t、s_{t-1}$ ：当前与上一时刻状态**
-- **$o_t$ ：当前输出（可为空）**
-- **$x_t$ ：当前输入（可为空）**
-- **$f$ ：循环函数**
+- **$s_t$、$s_{t-1}$：当前与上一时刻状态**
+- **$o_t$：当前输出（可为空）**
+- **$x_t$：当前输入（可为空）**
+- **$f$：循环函数**
 
 大脑是**这么运行**的：当前神经活动覆盖过去的神经活动。RNN 也可以看作原地运行：因为所有 RNN 单元完全相同，它们可以被视为同一个对象，RNN 单元的“状态”在每个时间步被覆盖。这就是循环示意图：
 
@@ -148,18 +147,13 @@ $$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ 
 
 >$s_t = \phi( W s_{t-1} + U x_t + b )$
 >其中：
-
- $\phi$ ：激活函数（sigmoid、tanh、ReLU 等）
- 
- $s_t \in \mathbb{R}^n$ ：当前状态（也是输出）
-
- $s_{t-1} \in \mathbb{R}^n$ ：上一状态
-
- $x_t \in \mathbb{R}^m$ ：当前输入
- 
- $W \in \mathbb{R}^{n \times n}$、 $U \in \mathbb{R}^{m \times n}$ 、 $b \in \mathbb{R}^n$ ：权重与偏置
- 
- $n$、 $m$ ：状态维度与输入维度
+>
+ $\phi$：激活函数（sigmoid、tanh、ReLU 等）
+ $s_t \in \mathbb{R}^n$：当前状态（也是输出）
+ $s_{t-1} \in \mathbb{R}^n$：上一状态
+ $x_t \in \mathbb{R}^m$：当前输入
+ $W \in \mathbb{R}^{n \times n}$、$U \in \mathbb{R}^{m \times n}$、$b \in \mathbb{R}^n$：权重与偏置
+ $n$、$m$：状态维度与输入维度
 
 即使是这个基础 RNN 单元也相当强大。虽然单单元不满足通用函数逼近条件，但已知一串普通 RNN 单元是**图灵完备**的，可以实现任何算法[（见 Siegelmann \&amp; Sontag, 1992）](http://binds.cs.umass.edu/papers/1995_Siegelmann_JComSysSci.pdf)。理论上很好，但实践中有个问题：**用反向传播训练普通 RNN 非常困难**，甚至比训练极深的前馈网络更难。原因是**信息畸变**和**梯度消失/爆炸**——由重复应用同一非线性函数导致。
 
@@ -175,7 +169,10 @@ $$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ 
 
 如果信息持续畸变，我们需要它时就很难正确利用。信息最可用的状态可能出现在过去。我们不仅要学会如何利用今天的信息（假设它还以原始可用形式存在），还要学会从当前状态解码原始状态（如果可能）。这导致学习困难、效果差。
 
-很容易证明普通 RNN 中必然发生信息畸变。假设在没有外部输入时，RNN 单元能完全保留上一状态，那么： $F(x) = \phi( W s_{t-1} + b )$ 会是关于 $s_{t−1}$ 的恒等函数。但恒等函数是线性的，而 $F(x)$ 是非线性的，矛盾。因此 RNN 单元**必然**会在时间步之间扭曲状态。普通 RNN 甚至无法完成输出 $s_{t}$ = $x_{t}$ 这种简单任务。
+很容易证明普通 RNN 中必然发生信息畸变。假设在没有外部输入时，RNN 单元能完全保留上一状态，那么：
+
+$F(x) = \phi( W s_{t-1} + b )$
+会是关于$s_{t−1}$ 的恒等函数。但恒等函数是线性的，而 $F(x)$ 是非线性的，矛盾。因此 RNN 单元**必然**会在时间步之间扭曲状态。普通 RNN 甚至无法完成输出 $s_{t}$ = $x_{t}$ 这种简单任务。
 
 这就是某些文献中所说的**退化问题**的根源[（如 He et al., 2015）](https://arxiv.org/abs/1512.03385)。作者称这一问题“出乎意料”、“反直觉”，但我希望本文能说明：退化问题（即信息畸变）其实非常自然（在很多情况下甚至是可取的）。我们后面会看到，虽然信息畸变不是 LSTM 最初的设计动机，但 LSTM 的原理恰好有效解决了这个问题。事实上，He 等人所用残差网络的有效性，也来自 LSTM 的核心原理。
 
@@ -191,7 +188,7 @@ $$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ 
 
 梯度消失/爆炸的数学分析可追溯到 90 年代初：[Bengio et al\. \(1994\)](http://www.dsi.unifi.it/~paolo/ps/tnn-94-gradient.pdf)、Hochreiter \(1991\)（德文原文，相关部分总结于 [Hochreiter \&amp; Schmidhuber, 1997）](http://isle.illinois.edu/sst/meetings/2015/hochreiter-lstm.pdf)。
 
-设 $s_{t}$ 为 $t$ 时刻状态向量， $Δv$ 为状态变化 $Δs_{t}$ 导致的向量变化。我们要给出一个充分条件，使得 $t$ 时刻状态变化对 $t+k$ 时刻的影响随 $k→∞$ 消失，即证明：
+设 $s_{t}$ 为 $t$ 时刻状态向量，$Δv$为状态变化 $Δs_{t}$ 导致的向量变化。我们要给出一个充分条件，使得 $t$ 时刻状态变化对 $t+k$ 时刻的影响随$k→∞$消失，即证明：
 
 $\Large lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0$
 
@@ -203,21 +200,17 @@ $\Large lim_{k \to \infty} \frac{\partial s_{t+k}}{\partial s_t} = 0$
 
 $\large s_{t+1} = \phi( z_t ),\quad 其中 \quad z_t = W s_t + U x_{t+1} + b$
 
-对多元函数应用**多元均值定理**，可证存在 $c \in [z_t,\ z_t+\Delta z_t]$，使得：
 
-$$ \begin{align*} \Delta s_{t+1} &= \big[\phi'(c)\big]\Delta z_t \\ &= \big[\phi'(c)\big]\Delta\left(W s_t\right) \\ &= \big[\phi'(c)\big]W \Delta s_t \end{align*} $$
 
-设 $\|A\|$ 为矩阵2‑范数， $|v|$ 为欧几里得向量范数，定义：
 
-$$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $$ 
-注：逻辑Sigmoid激活函数满足 $\gamma \leq \frac{1}{4}$，tanh激活函数满足 $\gamma \leq 1$。 $^8$ 对等式两侧取向量范数，推导如下：第一个不等式由矩阵2‑范数定义（连续使用两次）得到，第二个不等式由上确界定义得到： $$ \begin{align} \left|\Delta s_{t+1}\right| &= \big\|\big[\phi'(c)\big]W \Delta s_t\big\| \\ &\leq \big\|\big[\phi'(c)\big]\big\| \|W\| \left\|\Delta s_t\right\| \\ &\leq \gamma \|W\| \left\|\Delta s_t\right\| \\ &= \|\gamma W\| \left\|\Delta s_t\right\| \end{align} \tag{1} $$ 
+对多元函数应用**多元均值定理**，可证存在 $c \in [z_t,\ z_t+\Delta z_t]$，使得： $$ \begin{align*} \Delta s_{t+1} &= \big[\phi'(c)\big]\Delta z_t \\ &= \big[\phi'(c)\big]\Delta\left(W s_t\right) \\ &= \big[\phi'(c)\big]W \Delta s_t \end{align*} $$ 设 $\|A\|$ 为矩阵2‑范数，$|v|$ 为欧几里得向量范数，定义： $$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $$ 注：逻辑Sigmoid激活函数满足 $\gamma \leq \frac{1}{4}$，tanh激活函数满足 $\gamma \leq 1$。$^8$ 对等式两侧取向量范数，推导如下：第一个不等式由矩阵2‑范数定义（连续使用两次）得到，第二个不等式由上确界定义得到： $$ \begin{align} \left|\Delta s_{t+1}\right| &= \big\|\big[\phi'(c)\big]W \Delta s_t\big\| \\ &\leq \big\|\big[\phi'(c)\big]\big\| \|W\| \left\|\Delta s_t\right\| \\ &\leq \gamma \|W\| \left\|\Delta s_t\right\| \\ &= \|\gamma W\| \left\|\Delta s_t\right\| \end{align} \tag{1} $$
 将该式沿 $k$ 个时间步展开，可得 $\left|\Delta s_{t+k}\right| \leq \|\gamma W\|^k \left|\Delta s_t\right|$，
-因此：                                      $\large \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|} \leq \|\gamma W\|^k$ 
-因此，若满足 $\|\gamma W\| < 1$，则 $\large \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|}$ 随时间呈指数衰减，由此证明梯度消失的**充分条件**：    $$ {\lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0} $$ 
+因此： $$ \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|} \leq \|\gamma W\|^k $$
+因此，若满足 $\|\gamma W\| < 1$，则 $\frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|}$ 随时间呈指数衰减，由此证明梯度消失的**充分条件**： $$ {\lim_{k \to \infty} \frac{\Delta s_{t+k}}{\Delta s_t} = 0} $$
 ### 收敛于0的条件：
-何时满足 $\|\gamma W\| < 1$ ？ **即k步后累乘 → 0**
->隐含层为 **Sigmoid** 时： $\gamma \leq 1/4$ → $\|W\| < 4$ 就满足
->隐含层为 **Tanh** 时： $\gamma \leq 1$ → $\|W\| < 1$ 就满足
+何时满足 $\|\gamma W\| < 1$？ **即k步后累乘 → 0**
+>隐含层为 **Sigmoid** 时：$\gamma \leq 1/4$ → $\|W\| < 4$ 就满足
+>隐含层为 **Tanh** 时：$\gamma \leq 1$ → $\|W\| < 1$ 就满足
 
 该推导直接给出**结论**：
 	若权重矩阵 $W$ 初始化值**过小**，循环神经网络（RNN）会**因梯度消失**，无法有效学习初始阶段的信息。下文将拓展该分析，推导合理的权重初始化方案。
@@ -228,27 +221,24 @@ $$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $
 
 找到一种不会立即遭受此问题困扰的权重初始化方法是有益的。扩展上述分析以找到能让我们尽可能接近等式的 $W$ 的初始化，会得出一个很好的结果。
 
-首先，让我们假设 $\phi = \tanh$ 并取 $\gamma = 1$， $^9$ 但你也可以同样容易地假设 $\phi = \sigma$ 并取 $\gamma = \frac{1}{4}$ 来得出不同的结果。
+首先，让我们假设 $\phi = \tanh$ 并取 $\gamma = 1$，$^9$ 但你也可以同样容易地假设 $\phi = \sigma$ 并取 $\gamma = \frac{1}{4}$ 来得出不同的结果。
 
 我们的目标是找到一个 $W$ 的**初始化**，使得：
->1.  $\|\gamma W\| = 1$ 。
+>1.  $\|\gamma W\| = 1$。
 >2.  我们在公式 (1) 中尽可能接近等式。
 
 从第 1 点来看，既然我们取 $\gamma$ 为 1，我们有 $\|W\| = 1$。从第 2 点，我们得出应该尝试将 $W$ 的所有奇异值设为 1，而不仅仅是最大的那个。那么，如果 $W$ 的所有奇异值都等于 1，这意味着 $W$ 的每一列的范数都是 1（因为每一列是 $W e_i$，对于某个初等基向量 $e_i$，且我们有 $|W e_i| = |e_i| = 1$）。这意味着对于第 $j$ 列，我们有：
- $$\Sigma_i w_{ij}^2 = 1$$
+$$\Sigma_i w_{ij}^2 = 1$$
 
 第 $j$ 列中有 $n$ 个条目，我们要从同一个随机分布中选择每一个，所以让我们为一个随机权重 $w$ 找到一个分布，使得：
- $$n\mathbb{E}(w^2) = 1$$
+$$n\mathbb{E}(w^2) = 1$$
 
-现在假设我们要在区间 $[-R, R]$ 上均匀初始化 $w$。那么 $w$ 的均值为 0，所以根据定义， $\mathbb{E}(w^2)$ 就是其方差 $\mathbb{V}(w)$。区间 $[a, b]$ 上均匀分布的方差由 $\frac{(b-a)^2}{12}$ 给出，由此我们得到 $\mathbb{V}(w) = \frac{R^2}{3}$。将其代入我们的方程，我们得到：
- $$n \frac{R^2}{3} = 1$$ 
+现在假设我们要在区间 $[-R, R]$ 上均匀初始化 $w$。那么 $w$ 的均值为 0，所以根据定义，$\mathbb{E}(w^2)$ 就是其方差 $\mathbb{V}(w)$。区间 $[a, b]$ 上均匀分布的方差由 $\frac{(b-a)^2}{12}$ 给出，由此我们得到 $\mathbb{V}(w) = \frac{R^2}{3}$。将其代入我们的方程，我们得到：
+$$n \frac{R^2}{3} = 1$$
 使得：
 $$R = \frac{\sqrt{3}}{\sqrt{n}}$$
-
 这表明我们应该从以下区间上的均匀分布初始化我们的权重：
-
 $$\left[ -\frac{\sqrt{3}}{\sqrt{n}}, \frac{\sqrt{3}}{\sqrt{n}} \right]$$
-
 这是一个很好的结果，因为它是方阵权重矩阵的 Xavier-Glorot 初始化，但却是出于不同的动机。Xavier-Glorot 初始化由 [Glorot 和 Bengio (2010) ](http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf)提出，在实践中已被证明是一种有效的权重初始化方案。更一般地，Xavier-Glorot 方案适用于层中使用的 $m \times n$ 权重矩阵，该层的激活函数在原点附近的导数接近于 1（如 $\tanh$），并指出我们应该根据以下区间的均匀分布来初始化权重：
 $$\left[ -\frac{\sqrt{6}}{\sqrt{m+n}}, \frac{\sqrt{6}}{\sqrt{m+n}} \right]$$
 你可以轻松修改上述分析，以获得在使用逻辑 Sigmoid 函数（使用 $\gamma = \frac{1}{4}$）时以及根据不同的随机分布（例如，高斯分布）初始化权重时的初始化方案。
@@ -272,15 +262,15 @@ $$\left[ -\frac{\sqrt{6}}{\sqrt{m+n}}, \frac{\sqrt{6}}{\sqrt{m+n}} \right]$$
 
 我们以逐时间步更新梯度、同时将误差反向传播多步的场景为例进行说明：
 
-1. 在时刻 $t$ ，使用当前权重 $\boldsymbol{W}_t$ 计算当前输出 $\boldsymbol{o}_t$ 与当前状态 $\boldsymbol{s}_t$ 。
+1. 在时刻 $t$，使用当前权重 $\boldsymbol{W}_t$ 计算当前输出 $\boldsymbol{o}_t$ 与当前状态 $\boldsymbol{s}_t$。
     
-2. 第二步，利用 $\boldsymbol{o}_t$ 执行反向传播，将权重由 $\boldsymbol{W}_t$ 更新为 $\boldsymbol{W}_{t+1}$ 。
+2. 第二步，利用 $\boldsymbol{o}_t$ 执行反向传播，将权重由 $\boldsymbol{W}_t$ 更新为 $\boldsymbol{W}_{t+1}$。
     
-3. 第三步，在时刻 $t+1$ ，就像在步骤1用最初的 $\boldsymbol{W}_t$ 参与计算那样，我们用 $\boldsymbol{W}_{t+1}$ 和 $\boldsymbol{s}_t$ 去计算 $\boldsymbol{o}_{t+1}$ 和 $\boldsymbol{s}_{t+1}$ 。
+3. 第三步，在时刻 $t+1$，就像在步骤1用最初的 $\boldsymbol{W}_t$参与计算那样，我们用 $\boldsymbol{W}_{t+1}$ 和 $\boldsymbol{s}_t$ 去计算$\boldsymbol{o}_{t+1}$ 和 $\boldsymbol{s}_{t+1}$ 。
     
-4. 最后，利用 $\boldsymbol{o}_{t+1}$ 执行反向传播。但 $\boldsymbol{o}_{t+1}$ 是由 $\boldsymbol{s}_t$ 计算得到，而 $\boldsymbol{s}_t$ 基于旧权重 $\boldsymbol{W}_t$ （而非更新后的 $\boldsymbol{W}_{t+1}$ ）。
+4. 最后，利用 $\boldsymbol{o}_{t+1}$ 执行反向传播。但 $\boldsymbol{o}_{t+1}$ 是由 $\boldsymbol{s}_t$ 计算得到，而 $\boldsymbol{s}_t$ 基于旧权重 $\boldsymbol{W}_t$（而非更新后的 $\boldsymbol{W}_{t+1}$）。
 
-这意味着：我们在时间步 $t$ 计算得到的权重梯度，是基于旧权重 $\boldsymbol{W}_t$ 评估，而非当前权重 $\boldsymbol{W}_{t+1}$ 。因此该梯度只是基于当前权重计算出的梯度的近似值。
+这意味着：我们在时间步 $t$ 计算得到的权重梯度，是基于旧权重 $\boldsymbol{W}_t$ 评估，而非当前权重 $\boldsymbol{W}_{t+1}$。因此该梯度只是基于当前权重计算出的梯度的近似值。
 
 若我们将误差反向传播至更远的时间步，这种近似偏差会持续累积放大。
 
@@ -330,9 +320,9 @@ RNN 的情况比前馈网络更糟，原因在于**权重共享**。
 
 你需要知道的一件有用的事（以防你自己想到这个思路）是：**反向传播（Backpropagation）并不是训练循环神经网络（RNN）的唯一选择**。我们不必反向传播误差，也可以**前向传播梯度分量**，从而在每个时间步计算误差对权重的梯度。这种替代算法被称为**实时循环学习（Real-Time Recurrent Learning, RTRL）**。
 
-完整的 RTRL 计算开销过大，在实际中难以应用，其时间复杂度为 $O(n^4)$ 。相比之下，截断反向传播（Truncated Backpropagation Through Time, TBPTT）在参数更新频率与反向传递相同时，复杂度仅为 $O(n^2)$ 。
+完整的 RTRL 计算开销过大，在实际中难以应用，其时间复杂度为 $O(n^4)$。相比之下，截断反向传播（Truncated Backpropagation Through Time, TBPTT）在参数更新频率与反向传递相同时，复杂度仅为 $O(n^2)$。
 
-正如截断反向传播是对完整反向传播（时间复杂度为 $O(n^2L)$ ，当时间步数 $L$ 很大时，该复杂度可能远高于 RTRL）的近似一样，RTRL 也存在一种近似版本，称为**分组 RTRL（Subgrouped RTRL）**。当分组大小固定时，它能达到与截断反向传播相同的 $O(n^2)$ 时间复杂度，但其梯度近似方式在本质上有所不同。
+正如截断反向传播是对完整反向传播（时间复杂度为 $O(n^2L)$，当时间步数 $L$ 很大时，该复杂度可能远高于 RTRL）的近似一样，RTRL 也存在一种近似版本，称为**分组 RTRL（Subgrouped RTRL）**。当分组大小固定时，它能达到与截断反向传播相同的 $O(n^2)$ 时间复杂度，但其梯度近似方式在本质上有所不同。
 
 需要注意的是，RTRL 是一种基于梯度的算法，因此同样会受到**梯度消失与梯度爆炸问题**的困扰。你可以在 [Williams and Zipser (1995)](https://web.stanford.edu/class/psych209a/ReadingsByDate/02_25/Williams%20Zipser95RecNets.pdf) 的论文中了解更多关于 RTRL 的细节
 
@@ -363,7 +353,7 @@ RTRL 只是我想让你了解的一种可选方案，超出了本文的讨论范
 >现实中要保证信息不丢，就写下来。书写是增量修改，它可以是**加法**（纸上的笔墨）也可以是**减法**（岩石上的雕刻），并且只要没有外界干扰，它就会保持不变。
 >在 LSTM 中，一切都被‘写’了下来，并且假设没有其他状态单元或外部输入的干扰，它会将先前的状态向前传递。
 	换句话说，状态变化是**增量式**的:
-	$s_{t+1} = s_t + \Delta s_{t+1}$ . $^{10}$
+	$s_{t+1} = s_t + \Delta s_{t+1}$.$^{10}$
 
 Hochreiter 和 Schmidhuber 观察到，单纯的“把信息写下来”的思路之前已经有人尝试过，但效果并不理想。要理解原因，我们可以看看当我们持续写入变化时会发生什么： 我们的**写入**有正有负，理论上可以互相抵消，所以状态不一定会爆炸。但事实证明，网络很难学会如何协调这些写入操作。 尤其是在训练初期：我们的参数是随机初始化的，网络会进行一些完全随机的写入操作。从训练一开始，我们的“画布”就会变成这样： 
 
@@ -448,9 +438,9 @@ Hochreiter & Schmidhuber 称之为**输入权重冲突**：如果每个单元每
 需要注意的是：虽然把读取、写入和遗忘看作**二元决策**（非 0 即 1）会更符合直觉，但为了能通过梯度下降来训练模型，我们必须用**可微函数**来实现这些决策。逻辑 sigmoid 函数是一个非常自然的选择 —— 它本身是可微的，并且输出值恰好落在 0 到 1 之间。
 
 我们将这些读、写和遗忘向量称为 **门**，并可以使用最简单的函数来计算它们 —— 就像我们在普通循环神经网络（Vanilla RNN）中所做的那样：单层神经网络。在时间步 t 下，我们的三个门分别表示为：
-- $i_t$ ：输入门（控制写入input）
-- $o_t$ ：输出门（控制读取output）
-- $f_t$ ：遗忘门（控制保留/遗忘）
+- $i_t$：输入门（控制写入input）
+- $o_t$：输出门（控制读取output）
+- $f_t$：遗忘门（控制保留/遗忘）
 
 从这些名称中，我们立刻能注意到，LSTM 中有两处概念是 “反过来” 的：
 
@@ -470,9 +460,7 @@ Hochreiter & Schmidhuber 称之为**输入权重冲突**：如果每个单元每
     这在实际功能上并无差别，**但很容易造成理解上的混淆。**
 
 数学定义（注意它们的相似性）：
-
 $$\large \begin{aligned} i_t &= \sigma\left( W_i s_{t-1} + U_i x_t + b_i \right) \\ o_t &= \sigma\left( W_o s_{t-1} + U_o x_t + b_o \right) \\ f_t &= \sigma\left( W_f s_{t-1} + U_f x_t + b_f \right) \end{aligned}\tag{2} $$
-
 门也可以用更复杂的函数计算，比如近年有效的“乘法积分”（[Wu et al\., 2016](https://arxiv.org/abs/1606.06630)）。
 
 ## 拼接门，推导出原型 LSTM（Gluing gates together to derive a prototype LSTM）

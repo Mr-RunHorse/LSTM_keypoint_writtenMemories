@@ -107,7 +107,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "三极管.md",
+                "file": "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -117,7 +117,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "三极管 的反向链接列表"
+              "title": "关于LSTM：起源 本身 延伸 的反向链接列表"
             }
           },
           {
@@ -126,12 +126,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "三极管.md",
+                "file": "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "三极管 的出链列表"
+              "title": "关于LSTM：起源 本身 延伸 的出链列表"
             }
           },
           {
@@ -169,13 +169,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "LSTM笔记_打包发布/README.md",
+                "file": "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "README 的大纲"
+              "title": "关于LSTM：起源 本身 延伸 的大纲"
             }
           },
           {
@@ -208,7 +208,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b7fc30c6418f528a",
+  "active": "81629ae27d6244f6",
   "lastOpenFiles": [
     "README.md",
     "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
