@@ -4,7 +4,7 @@
 ## 📖 仓库简介 
 这是一份对经典文章《Written Memories: Understanding, Deriving, and Extending the LSTM》的中文翻译与学习笔记，包含： 
 - 原文完整译文，还原文章逻辑与推导过程
-- 原创手绘结构图，拆解LSTM、GRU等循环网络的核心机制 
+- 原创手绘风结构图，拆解LSTM、GRU等循环网络的核心机制 
 - 补充推导笔记，解释梯度消失、门控机制等关键数学原理 适合所有想深入理解LSTM的机器学习/深度学习学习者。 
 --- 
 ## 📂 仓库结构
@@ -34,7 +34,7 @@
 
 --- 
 ## 📜 版权与声明 
-- **原文出处**：《Written Memories: Understanding, Deriving, and Extending the LSTM》，作者：Silviu Pitis 
+- **原文出处**：《Written Memories: Understanding, Deriving, and Extending the LSTM》，作者：[Silviu Pitis](https://silviupitis.com) 
 - **译文说明**：本译文为个人学习用途，仅作非商业分享，翻译过程中已尽量还原原文逻辑，如有疏漏欢迎指正。 
 - **图片版权**：所有 `img/` 目录下的结构图均为本人原创绘制，未经授权请勿商用或二次修改发布。 
 - --- 

@@ -1,5 +1,5 @@
 # [关于LSTM：起源 本身 延伸](https://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html#fn11)
-#Silviu·Pitis 
+#Silviu·Pitis #机器学习 #LSTM #RNN #Mr_RunHorse #手绘风原理图 #没翻译完
 # 引言
 
 初次接触长短期记忆网络（LSTM）时，我很难忽略它的复杂性。我不理解它为何要这样设计，只知道它效果很好。事实证明，LSTM 是可以被理解的；尽管表面看起来复杂，LSTM 实际上基于几条极其简单、甚至很优美的神经网络洞见。这篇文章是我当初学习循环神经网络（RNN）时希望能读到的内容。

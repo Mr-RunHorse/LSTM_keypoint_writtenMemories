@@ -25,12 +25,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "关于LSTM：起源 本身 延伸"
             }
           }
         ],
@@ -66,7 +66,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#Silviu·Pitis",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -87,7 +87,8 @@
               "title": "书签"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -210,8 +211,9 @@
   },
   "active": "f8134ffc101b214e",
   "lastOpenFiles": [
-    "LSTM笔记_打包发布/README.md",
     "README.md",
+    "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
+    "LSTM笔记_打包发布/README.md",
     "markdown/关于LSTM：起源 本身 延伸.md",
     "markdown",
     "img/关于LSTM：起源 本身 延伸--9.jpg",
@@ -225,7 +227,6 @@
     "img/关于LSTM：起源 本身 延伸--15.jpg",
     "img/关于LSTM：起源 本身 延伸--14.jpg",
     "img",
-    "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
     "LSTM笔记_打包发布/markdown",
     "LSTM笔记_打包发布/img",
     "神经网络/LSTM/关于LSTM：起源 本身 延伸.md",
