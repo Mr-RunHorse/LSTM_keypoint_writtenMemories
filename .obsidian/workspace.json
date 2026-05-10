@@ -169,13 +169,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "三极管.md",
+                "file": "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "三极管 的大纲"
+              "title": "关于LSTM：起源 本身 延伸 的大纲"
             }
           },
           {
@@ -189,7 +189,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -208,7 +208,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4a11c74cd4fe4703",
+  "active": "27d701fb10cb1dc5",
   "lastOpenFiles": [
     "LSTM笔记_打包发布/markdown",
     "LSTM笔记_打包发布/img",
