@@ -175,11 +175,7 @@ $$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ 
 
 如果信息持续畸变，我们需要它时就很难正确利用。信息最可用的状态可能出现在过去。我们不仅要学会如何利用今天的信息（假设它还以原始可用形式存在），还要学会从当前状态解码原始状态（如果可能）。这导致学习困难、效果差。
 
-很容易证明普通 RNN 中必然发生信息畸变。假设在没有外部输入时，RNN 单元能完全保留上一状态，那么：
-
-$F(x) = \phi( W s_{t-1} + b )$
-
-会是关于 $s_{t−1}$ 的恒等函数。但恒等函数是线性的，而 $F(x)$ 是非线性的，矛盾。因此 RNN 单元**必然**会在时间步之间扭曲状态。普通 RNN 甚至无法完成输出 $s_{t}$ = $x_{t}$ 这种简单任务。
+很容易证明普通 RNN 中必然发生信息畸变。假设在没有外部输入时，RNN 单元能完全保留上一状态，那么： $F(x) = \phi( W s_{t-1} + b )$ 会是关于 $s_{t−1}$ 的恒等函数。但恒等函数是线性的，而 $F(x)$ 是非线性的，矛盾。因此 RNN 单元**必然**会在时间步之间扭曲状态。普通 RNN 甚至无法完成输出 $s_{t}$ = $x_{t}$ 这种简单任务。
 
 这就是某些文献中所说的**退化问题**的根源[（如 He et al., 2015）](https://arxiv.org/abs/1512.03385)。作者称这一问题“出乎意料”、“反直觉”，但我希望本文能说明：退化问题（即信息畸变）其实非常自然（在很多情况下甚至是可取的）。我们后面会看到，虽然信息畸变不是 LSTM 最初的设计动机，但 LSTM 的原理恰好有效解决了这个问题。事实上，He 等人所用残差网络的有效性，也来自 LSTM 的核心原理。
 
@@ -210,10 +206,12 @@ $\large s_{t+1} = \phi( z_t ),\quad 其中 \quad z_t = W s_t + U x_{t+1} + b$
 
 
 
-对多元函数应用**多元均值定理**，可证存在 $c \in [z_t,\ z_t+\Delta z_t]$，使得： 
+对多元函数应用**多元均值定理**，可证存在 $c \in [z_t,\ z_t+\Delta z_t]$，使得：
+
 $$ \begin{align*} \Delta s_{t+1} &= \big[\phi'(c)\big]\Delta z_t \\ &= \big[\phi'(c)\big]\Delta\left(W s_t\right) \\ &= \big[\phi'(c)\big]W \Delta s_t \end{align*} $$
+
 设 $\|A\|$ 为矩阵2‑范数，$|v|$ 为欧几里得向量范数，定义： 
-$$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $$
+$$ \gamma = \sup_{c \in [z_t,\ z_t+\Delta z_t]} \big\|\big[\phi'(c)\big]\big\| $$ 
 注：逻辑Sigmoid激活函数满足 $\gamma \leq \frac{1}{4}$，tanh激活函数满足 $\gamma \leq 1$。$^8$ 对等式两侧取向量范数，推导如下：第一个不等式由矩阵2‑范数定义（连续使用两次）得到，第二个不等式由上确界定义得到： $$ \begin{align} \left|\Delta s_{t+1}\right| &= \big\|\big[\phi'(c)\big]W \Delta s_t\big\| \\ &\leq \big\|\big[\phi'(c)\big]\big\| \|W\| \left\|\Delta s_t\right\| \\ &\leq \gamma \|W\| \left\|\Delta s_t\right\| \\ &= \|\gamma W\| \left\|\Delta s_t\right\| \end{align} \tag{1} $$ 
 将该式沿 $k$ 个时间步展开，可得 $\left|\Delta s_{t+k}\right| \leq \|\gamma W\|^k \left|\Delta s_t\right|$，
 因此： $$ \frac{\left|\Delta s_{t+k}\right|}{\left|\Delta s_t\right|} \leq \|\gamma W\|^k $$ 
