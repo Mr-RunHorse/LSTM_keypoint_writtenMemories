@@ -208,9 +208,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0ddc9158c0624eab",
+  "active": "f8134ffc101b214e",
   "lastOpenFiles": [
     "LSTM笔记_打包发布/README.md",
+    "README.md",
     "markdown/关于LSTM：起源 本身 延伸.md",
     "markdown",
     "img/关于LSTM：起源 本身 延伸--9.jpg",
@@ -254,7 +255,6 @@
     "Stepxx_PCB相关/接口引出 + 编码器模块.md",
     "Stepxx_PCB相关/BOOT RESET SWD.md",
     "Stepxx_PCB相关/BLDC电机三相桥采样电路原理.md",
-    "Stepxx_PCB相关/三极管 MOS管 IGBT.md",
-    "Stepxx_PCB相关/8MHz外部晶振电路.md"
+    "Stepxx_PCB相关/三极管 MOS管 IGBT.md"
   ]
 }
