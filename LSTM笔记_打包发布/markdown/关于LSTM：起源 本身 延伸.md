@@ -1,5 +1,5 @@
 # [关于LSTM：起源 本身 延伸](https://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html#fn11)
-
+#Silviu·Pitis 
 # 引言
 
 初次接触长短期记忆网络（LSTM）时，我很难忽略它的复杂性。我不理解它为何要这样设计，只知道它效果很好。事实证明，LSTM 是可以被理解的；尽管表面看起来复杂，LSTM 实际上基于几条极其简单、甚至很优美的神经网络洞见。这篇文章是我当初学习循环神经网络（RNN）时希望能读到的内容。
@@ -17,9 +17,11 @@
 ---
 ## 译者引言
 
-这是我翻译的，希望大家可以看懂。
-原文 [Written Memories: Understanding, Deriving and Extending the LSTM](https://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html#fn11)的著作权归原作者 #Silviu·Pitis 所有。
-本文图片是本人精心创作
+- 这是我翻译的，希望大家可以看懂。
+- 原文 [Written Memories: Understanding, Deriving and Extending the LSTM](https://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html#fn11)的著作权归原作者 [Silviu Pitis](https://silviupitis.com/) 所有。
+- 示意图均为本人 （Mr_RunHorse@163.com）精心根据原文配图修改创作
+- 几种神经网络的对比图和公式比较为译者本人后加的，希望便于理解
+
 ## 版权声明
 本译文仅用于非商业学习交流，不代表原作者观点。文中所有示意图为译者原创，转载请注明出处。
 
