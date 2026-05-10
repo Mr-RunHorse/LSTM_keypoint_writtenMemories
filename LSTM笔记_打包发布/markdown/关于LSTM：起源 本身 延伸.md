@@ -156,9 +156,9 @@ $\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x
  
  $x_t \in \mathbb{R}^m$ ：当前输入
  
- $W \in \mathbb{R}^{n \times n}$、$U \in \mathbb{R}^{m \times n}$、$b \in \mathbb{R}^n$ ：权重与偏置
+ $W \in \mathbb{R}^{n \times n}$、 $U \in \mathbb{R}^{m \times n}$ 、 $b \in \mathbb{R}^n$ ：权重与偏置
  
- $n$、$m$ ：状态维度与输入维度
+ $n$、 $m$ ：状态维度与输入维度
 
 即使是这个基础 RNN 单元也相当强大。虽然单单元不满足通用函数逼近条件，但已知一串普通 RNN 单元是**图灵完备**的，可以实现任何算法[（见 Siegelmann \&amp; Sontag, 1992）](http://binds.cs.umass.edu/papers/1995_Siegelmann_JComSysSci.pdf)。理论上很好，但实践中有个问题：**用反向传播训练普通 RNN 非常困难**，甚至比训练极深的前馈网络更难。原因是**信息畸变**和**梯度消失/爆炸**——由重复应用同一非线性函数导致。
 
