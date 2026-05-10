@@ -1,5 +1,4 @@
 # LSTM_keypoint_writtenMemories
-讲解 LSTM 结构背后的直觉，借此一步步搭建并推导出 LSTM
 # 《关于LSTM：起源、本身与延伸》学习笔记（译文并且有小改动） 
 ## 📖 仓库简介 
 这是一份对经典文章《Written Memories: Understanding, Deriving, and Extending the LSTM》的中文翻译与学习笔记，包含： 
