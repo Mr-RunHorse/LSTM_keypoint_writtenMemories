@@ -41,6 +41,7 @@
 1. 直接打开 `markdown/关于LSTM：起源 本身 延伸.md` 即可阅读完整译文与笔记 
 2. 所有图片已嵌入Markdown文件，无需额外下载 
 3. 建议使用 Obsidian、Typora 等支持图片嵌入的编辑器打开，阅读体验更佳 
+4. **译者本人用的是Obsidian，想要最好的观看体验，建议用Obsidian打开阅读**
 --- 
 ## 🙏 致谢 
 感谢原作者 [Silviu Pitis](https://silviupitis.com/) 写出了如此清晰易懂的LSTM讲解文章，让更多人能真正理解循环神经网络的底层逻辑。
