@@ -1,0 +1,260 @@
+{
+  "main": {
+    "id": "1ffaad6f96700add",
+    "type": "split",
+    "children": [
+      {
+        "id": "73f3716a71a4aaa1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b30162d0a587fd19",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "empty",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "4a11c74cd4fe4703",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "关于LSTM：起源 本身 延伸"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d778ec86e91ddc25",
+    "type": "split",
+    "children": [
+      {
+        "id": "b00183457028b464",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0ddc9158c0624eab",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "32046ec75b688e4f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "7baca4c0b8c4b67c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 453.5
+  },
+  "right": {
+    "id": "619467c753a54bc6",
+    "type": "split",
+    "children": [
+      {
+        "id": "473abe6c70891b4a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "64d6517913976a78",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "三极管.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "三极管 的反向链接列表"
+            }
+          },
+          {
+            "id": "9d38181cfd53f813",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "三极管.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "三极管 的出链列表"
+            }
+          },
+          {
+            "id": "8c62b577658f7246",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "d37a0f798448c59c",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "27d701fb10cb1dc5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "三极管.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "三极管 的大纲"
+            }
+          },
+          {
+            "id": "81629ae27d6244f6",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "4a11c74cd4fe4703",
+  "lastOpenFiles": [
+    "LSTM笔记_打包发布/markdown",
+    "LSTM笔记_打包发布/img",
+    "LSTM笔记_打包发布/img/关于LSTM：起源 本身 延伸--1.jpg",
+    "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--15.jpg",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--14.jpg",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--13.jpg",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--12.jpg",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--11.jpg",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--10.jpg",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--9.jpg",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--7.jpg",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸--6.jpg",
+    "神经网络/LSTM/关于LSTM：起源 本身 延伸.md",
+    "神经网络/LSTM笔记_打包发布/关于LSTM：起源 本身 延伸.md",
+    "神经网络/LSTM笔记_打包发布",
+    "神经网络/LSTM - 副本/关于LSTM：起源 本身 延伸.md",
+    "神经网络/LSTM - 副本",
+    "神经网络/LSTM/新建 文本文档.txt",
+    "这里放图片链接/嵌入图片.md",
+    "这里放图片链接",
+    "函数CSV图片/新建 文本文档.txt",
+    "函数CSV图片/sigmoid_有坐标轴.txt",
+    "函数CSV图片/sigmoid.txt",
+    "函数CSV图片/sigmoid.csv",
+    "函数CSV图片",
+    "神经网络/RNN/循环神经网络（RNN）：让AI学会“看懂电影”的时间感知机制.md",
+    "神经网络/RNN/RNN网课初稿.md",
+    "Step3_IGBT/IGBT导通原理学习笔记（贴合个人推理版）.md",
+    "Step4_FOC控制/Clarke 变换幅值放大推导.md",
+    "Step4_FOC控制/FOC：克拉克变换与帕克变换.md",
+    "Stepxx_PCB相关/三相电机驱动电路 详细笔记（防遗忘版，适配FOC电调）.md",
+    "Step4_FOC控制/FOC：由六步换向到正弦波控制.md",
+    "Step2_MOS管/MOS管和其他晶体管 · 学习笔记（详细版）.md",
+    "Step2_MOS管/MOS管----MOSFET.md",
+    "Stepxx_PCB相关/三相逆变电路_半桥驱动.md",
+    "Stepxx_PCB相关/电流检测.md",
+    "Stepxx_PCB相关/12V转5V供电.md",
+    "-X_FOC-master/-X_FOC-master/README.md",
+    "Stepxx_PCB相关/主控模块 适配FOC电调.md",
+    "Stepxx_PCB相关/接口引出 + 编码器模块.md",
+    "Stepxx_PCB相关/BOOT RESET SWD.md",
+    "Stepxx_PCB相关/BLDC电机三相桥采样电路原理.md",
+    "Stepxx_PCB相关/三极管 MOS管 IGBT.md",
+    "Stepxx_PCB相关/8MHz外部晶振电路.md",
+    "Stepxx_PCB相关/DRV8313PWPR（U21）三相电机驱动电路 详细笔记（防遗忘版，适配FOC电调）.md"
+  ]
+}
