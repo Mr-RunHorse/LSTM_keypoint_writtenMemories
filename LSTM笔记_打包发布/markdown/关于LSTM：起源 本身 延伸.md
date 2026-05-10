@@ -274,7 +274,7 @@ $$\left[ -\frac{\sqrt{6}}{\sqrt{m+n}}, \frac{\sqrt{6}}{\sqrt{m+n}} \right]$$
 
 1. 在时刻 $t$ ，使用当前权重 $\boldsymbol{W}_t$ 计算当前输出 $\boldsymbol{o}_t$ 与当前状态 $\boldsymbol{s}_t$ 。
     
-2. 第二步，利用 $\boldsymbol{o}_t$ 执行反向传播，将权重由 $\boldsymbol{W}_t$ 更新为 $\boldsymbol{W}_{t+1}$。
+2. 第二步，利用 $\boldsymbol{o}_t$ 执行反向传播，将权重由 $\boldsymbol{W}_t$ 更新为 $\boldsymbol{W}_{t+1}$ 。
     
 3. 第三步，在时刻 $t+1$ ，就像在步骤1用最初的 $\boldsymbol{W}_t$ 参与计算那样，我们用 $\boldsymbol{W}_{t+1}$ 和 $\boldsymbol{s}_t$ 去计算 $\boldsymbol{o}_{t+1}$ 和 $\boldsymbol{s}_{t+1}$ 。
     
