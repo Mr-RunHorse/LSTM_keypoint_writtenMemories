@@ -272,15 +272,15 @@ $$\left[ -\frac{\sqrt{6}}{\sqrt{m+n}}, \frac{\sqrt{6}}{\sqrt{m+n}} \right]$$
 
 我们以逐时间步更新梯度、同时将误差反向传播多步的场景为例进行说明：
 
-1. 在时刻 $t$，使用当前权重 $\boldsymbol{W}_t$ 计算当前输出 $\boldsymbol{o}_t$ 与当前状态 $\boldsymbol{s}_t$。
+1. 在时刻 $t$ ，使用当前权重 $\boldsymbol{W}_t$ 计算当前输出 $\boldsymbol{o}_t$ 与当前状态 $\boldsymbol{s}_t$ 。
     
 2. 第二步，利用 $\boldsymbol{o}_t$ 执行反向传播，将权重由 $\boldsymbol{W}_t$ 更新为 $\boldsymbol{W}_{t+1}$。
     
-3. 第三步，在时刻 $t+1$，就像在步骤1用最初的 $\boldsymbol{W}_t$参与计算那样，我们用 $\boldsymbol{W}_{t+1}$ 和 $\boldsymbol{s}_t$ 去计算$\boldsymbol{o}_{t+1}$ 和 $\boldsymbol{s}_{t+1}$ 。
+3. 第三步，在时刻 $t+1$ ，就像在步骤1用最初的 $\boldsymbol{W}_t$ 参与计算那样，我们用 $\boldsymbol{W}_{t+1}$ 和 $\boldsymbol{s}_t$ 去计算 $\boldsymbol{o}_{t+1}$ 和 $\boldsymbol{s}_{t+1}$ 。
     
-4. 最后，利用 $\boldsymbol{o}_{t+1}$ 执行反向传播。但 $\boldsymbol{o}_{t+1}$ 是由 $\boldsymbol{s}_t$ 计算得到，而 $\boldsymbol{s}_t$ 基于旧权重 $\boldsymbol{W}_t$（而非更新后的 $\boldsymbol{W}_{t+1}$）。
+4. 最后，利用 $\boldsymbol{o}_{t+1}$ 执行反向传播。但 $\boldsymbol{o}_{t+1}$ 是由 $\boldsymbol{s}_t$ 计算得到，而 $\boldsymbol{s}_t$ 基于旧权重 $\boldsymbol{W}_t$ （而非更新后的 $\boldsymbol{W}_{t+1}$ ）。
 
-这意味着：我们在时间步 $t$ 计算得到的权重梯度，是基于旧权重 $\boldsymbol{W}_t$ 评估，而非当前权重 $\boldsymbol{W}_{t+1}$。因此该梯度只是基于当前权重计算出的梯度的近似值。
+这意味着：我们在时间步 $t$ 计算得到的权重梯度，是基于旧权重 $\boldsymbol{W}_t$ 评估，而非当前权重 $\boldsymbol{W}_{t+1}$ 。因此该梯度只是基于当前权重计算出的梯度的近似值。
 
 若我们将误差反向传播至更远的时间步，这种近似偏差会持续累积放大。
 
@@ -330,9 +330,9 @@ RNN 的情况比前馈网络更糟，原因在于**权重共享**。
 
 你需要知道的一件有用的事（以防你自己想到这个思路）是：**反向传播（Backpropagation）并不是训练循环神经网络（RNN）的唯一选择**。我们不必反向传播误差，也可以**前向传播梯度分量**，从而在每个时间步计算误差对权重的梯度。这种替代算法被称为**实时循环学习（Real-Time Recurrent Learning, RTRL）**。
 
-完整的 RTRL 计算开销过大，在实际中难以应用，其时间复杂度为 $O(n^4)$。相比之下，截断反向传播（Truncated Backpropagation Through Time, TBPTT）在参数更新频率与反向传递相同时，复杂度仅为 $O(n^2)$。
+完整的 RTRL 计算开销过大，在实际中难以应用，其时间复杂度为 $O(n^4)$ 。相比之下，截断反向传播（Truncated Backpropagation Through Time, TBPTT）在参数更新频率与反向传递相同时，复杂度仅为 $O(n^2)$ 。
 
-正如截断反向传播是对完整反向传播（时间复杂度为 $O(n^2L)$，当时间步数 $L$ 很大时，该复杂度可能远高于 RTRL）的近似一样，RTRL 也存在一种近似版本，称为**分组 RTRL（Subgrouped RTRL）**。当分组大小固定时，它能达到与截断反向传播相同的 $O(n^2)$ 时间复杂度，但其梯度近似方式在本质上有所不同。
+正如截断反向传播是对完整反向传播（时间复杂度为 $O(n^2L)$ ，当时间步数 $L$ 很大时，该复杂度可能远高于 RTRL）的近似一样，RTRL 也存在一种近似版本，称为**分组 RTRL（Subgrouped RTRL）**。当分组大小固定时，它能达到与截断反向传播相同的 $O(n^2)$ 时间复杂度，但其梯度近似方式在本质上有所不同。
 
 需要注意的是，RTRL 是一种基于梯度的算法，因此同样会受到**梯度消失与梯度爆炸问题**的困扰。你可以在 [Williams and Zipser (1995)](https://web.stanford.edu/class/psych209a/ReadingsByDate/02_25/Williams%20Zipser95RecNets.pdf) 的论文中了解更多关于 RTRL 的细节
 
@@ -363,7 +363,7 @@ RTRL 只是我想让你了解的一种可选方案，超出了本文的讨论范
 >现实中要保证信息不丢，就写下来。书写是增量修改，它可以是**加法**（纸上的笔墨）也可以是**减法**（岩石上的雕刻），并且只要没有外界干扰，它就会保持不变。
 >在 LSTM 中，一切都被‘写’了下来，并且假设没有其他状态单元或外部输入的干扰，它会将先前的状态向前传递。
 	换句话说，状态变化是**增量式**的:
-	$s_{t+1} = s_t + \Delta s_{t+1}$.$^{10}$
+	$s_{t+1} = s_t + \Delta s_{t+1}$ . $^{10}$
 
 Hochreiter 和 Schmidhuber 观察到，单纯的“把信息写下来”的思路之前已经有人尝试过，但效果并不理想。要理解原因，我们可以看看当我们持续写入变化时会发生什么： 我们的**写入**有正有负，理论上可以互相抵消，所以状态不一定会爆炸。但事实证明，网络很难学会如何协调这些写入操作。 尤其是在训练初期：我们的参数是随机初始化的，网络会进行一些完全随机的写入操作。从训练一开始，我们的“画布”就会变成这样： 
 
