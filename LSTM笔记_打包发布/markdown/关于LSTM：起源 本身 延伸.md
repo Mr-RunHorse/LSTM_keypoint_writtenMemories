@@ -96,7 +96,7 @@ RNN 单元的代数描述：
 $\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x_t \end{pmatrix} \right)$
 
 其中：
-- **$s_t$、$s_{t-1}$ ：当前与上一时刻状态**
+- **$s_t$、 $s_{t-1}$ ：当前与上一时刻状态**
 - **$o_t$ ：当前输出（可为空）**
 - **$x_t$ ：当前输入（可为空）**
 - **$f$ ：循环函数**
