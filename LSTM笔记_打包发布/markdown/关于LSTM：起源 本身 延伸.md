@@ -96,10 +96,10 @@ RNN 单元的代数描述：
 $\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x_t \end{pmatrix} \right)$
 
 其中：
-- **$s_t$、$s_{t-1}$：当前与上一时刻状态**
-- **$o_t$：当前输出（可为空）**
-- **$x_t$：当前输入（可为空）**
-- **$f$：循环函数**
+- **$s_t$、$s_{t-1}$ ：当前与上一时刻状态**
+- **$o_t$ ：当前输出（可为空）**
+- **$x_t$ ：当前输入（可为空）**
+- **$f$ ：循环函数**
 
 大脑是**这么运行**的：当前神经活动覆盖过去的神经活动。RNN 也可以看作原地运行：因为所有 RNN 单元完全相同，它们可以被视为同一个对象，RNN 单元的“状态”在每个时间步被覆盖。这就是循环示意图：
 
@@ -148,12 +148,12 @@ $\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x
 >$s_t = \phi( W s_{t-1} + U x_t + b )$
 >其中：
 
- $\phi$：激活函数（sigmoid、tanh、ReLU 等）
- $s_t \in \mathbb{R}^n$：当前状态（也是输出）
- $s_{t-1} \in \mathbb{R}^n$：上一状态
- $x_t \in \mathbb{R}^m$：当前输入
- $W \in \mathbb{R}^{n \times n}$、$U \in \mathbb{R}^{m \times n}$、$b \in \mathbb{R}^n$：权重与偏置
- $n$、$m$：状态维度与输入维度
+ $\phi$ ：激活函数（sigmoid、tanh、ReLU 等）
+ $s_t \in \mathbb{R}^n$ ：当前状态（也是输出）
+ $s_{t-1} \in \mathbb{R}^n$ ：上一状态
+ $x_t \in \mathbb{R}^m$ ：当前输入
+ $W \in \mathbb{R}^{n \times n}$、$U \in \mathbb{R}^{m \times n}$、$b \in \mathbb{R}^n$ ：权重与偏置
+ $n$、$m$ ：状态维度与输入维度
 
 即使是这个基础 RNN 单元也相当强大。虽然单单元不满足通用函数逼近条件，但已知一串普通 RNN 单元是**图灵完备**的，可以实现任何算法[（见 Siegelmann \&amp; Sontag, 1992）](http://binds.cs.umass.edu/papers/1995_Siegelmann_JComSysSci.pdf)。理论上很好，但实践中有个问题：**用反向传播训练普通 RNN 非常困难**，甚至比训练极深的前馈网络更难。原因是**信息畸变**和**梯度消失/爆炸**——由重复应用同一非线性函数导致。
 
@@ -443,9 +443,9 @@ Hochreiter & Schmidhuber 称之为**输入权重冲突**：如果每个单元每
 需要注意的是：虽然把读取、写入和遗忘看作**二元决策**（非 0 即 1）会更符合直觉，但为了能通过梯度下降来训练模型，我们必须用**可微函数**来实现这些决策。逻辑 sigmoid 函数是一个非常自然的选择 —— 它本身是可微的，并且输出值恰好落在 0 到 1 之间。
 
 我们将这些读、写和遗忘向量称为 **门**，并可以使用最简单的函数来计算它们 —— 就像我们在普通循环神经网络（Vanilla RNN）中所做的那样：单层神经网络。在时间步 t 下，我们的三个门分别表示为：
-- $i_t$：输入门（控制写入input）
-- $o_t$：输出门（控制读取output）
-- $f_t$：遗忘门（控制保留/遗忘）
+- $i_t$ ：输入门（控制写入input）
+- $o_t$ ：输出门（控制读取output）
+- $f_t$ ：遗忘门（控制保留/遗忘）
 
 从这些名称中，我们立刻能注意到，LSTM 中有两处概念是 “反过来” 的：
 
