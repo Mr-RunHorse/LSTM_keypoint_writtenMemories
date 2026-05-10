@@ -23,14 +23,14 @@
             "id": "3bf059d27abe926e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
-                "mode": "source",
-                "source": false
+                "aFile": ".obsidian/workspace.json",
+                "bFile": ".obsidian/workspace.json",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "关于LSTM：起源 本身 延伸"
+              "icon": "diff",
+              "title": "Diff: workspace.json  (Working Tree)"
             }
           }
         ],
@@ -208,8 +208,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "81629ae27d6244f6",
+  "active": "3bf059d27abe926e",
   "lastOpenFiles": [
+    "README.md",
     "LSTM笔记_打包发布/markdown/关于LSTM：起源 本身 延伸.md",
     "LSTM笔记_打包发布/img/关于LSTM：起源 本身 延伸--9.jpg",
     "LSTM笔记_打包发布/img/关于LSTM：起源 本身 延伸--8.png",
@@ -220,7 +221,6 @@
     "LSTM笔记_打包发布/img/关于LSTM：起源 本身 延伸--3.jpg",
     "LSTM笔记_打包发布/img/关于LSTM：起源 本身 延伸--2.jpg",
     "LSTM笔记_打包发布/img/关于LSTM：起源 本身 延伸--1.jpg",
-    "README.md",
     "LSTM笔记_打包发布/README.md",
     "markdown/关于LSTM：起源 本身 延伸.md",
     "markdown",
