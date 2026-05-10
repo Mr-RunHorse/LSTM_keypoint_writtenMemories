@@ -470,7 +470,9 @@ Hochreiter & Schmidhuber 称之为**输入权重冲突**：如果每个单元每
     这在实际功能上并无差别，**但很容易造成理解上的混淆。**
 
 数学定义（注意它们的相似性）：
+
 $$\large \begin{aligned} i_t &= \sigma\left( W_i s_{t-1} + U_i x_t + b_i \right) \\ o_t &= \sigma\left( W_o s_{t-1} + U_o x_t + b_o \right) \\ f_t &= \sigma\left( W_f s_{t-1} + U_f x_t + b_f \right) \end{aligned}\tag{2} $$
+
 门也可以用更复杂的函数计算，比如近年有效的“乘法积分”（[Wu et al\., 2016](https://arxiv.org/abs/1606.06630)）。
 
 ## 拼接门，推导出原型 LSTM（Gluing gates together to derive a prototype LSTM）
