@@ -91,7 +91,8 @@ RNN 是**相同前馈网络的组合**，每个时刻/时间步对应一个，�
 ![[关于LSTM：起源 本身 延伸--2.jpg|697]]
 你可以把循环输出看作传递到下一个时间步的**状态**。因此，一个 RNN 单元接收**上一时刻状态**和（可选）**当前输入**，并产生**当前状态**和（可选）**当前输出**。
 
-RNN 单元的代数描述：$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x_t \end{pmatrix} \right)$
+RNN 单元的代数描述：
+$$\begin{pmatrix} s_t \\ o_t \end{pmatrix} = f\left( \begin{pmatrix} s_{t-1} \\ x_t \end{pmatrix} \right)$$
 
 其中：
 - **$s_t、s_{t-1}$ ：当前与上一时刻状态**
