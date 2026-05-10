@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LSTM笔记_打包发布/README.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
@@ -208,10 +208,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f8134ffc101b214e",
+  "active": "0ddc9158c0624eab",
   "lastOpenFiles": [
-    "markdown/关于LSTM：起源 本身 延伸.md",
     "LSTM笔记_打包发布/README.md",
+    "markdown/关于LSTM：起源 本身 延伸.md",
     "markdown",
     "img/关于LSTM：起源 本身 延伸--9.jpg",
     "img/关于LSTM：起源 本身 延伸--8.png",
